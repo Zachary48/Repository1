@@ -1,0 +1,59 @@
+/* App.css */
+
+/* Center the entire app container */
+.app-container {
+  display: flex; /* Enables flex layout */
+  flex-direction: column; /* Stacks children vertically */
+  align-items: center; /* Centers items horizontally */
+  justify-content: center; /* Centers items vertically */
+  text-align: center; /* Centers text within the container */
+  min-height: 100vh; /* Ensures the container takes up the full viewport height */
+  padding: 20px; /* Adds padding around the container */
+  box-sizing: border-box; /* Includes padding in the element's total width/height */
+}
+
+/* Style the header */
+.header {
+  background-color: #eaf0ed; /* UNT green background */
+  color: white; /* White text color for contrast */
+}
+
+
+
+/* Center and style posts */
+.posts-container {
+  max-width: 600px; /* Limits the width of the posts container */
+  margin-top: 20px; /* Adds space above the posts container */
+  background-color: #ecf3f1; /* UNT green background */
+  padding: 20px; /* Adds padding inside the posts container */
+  border-radius: 8px; /* Rounds the corners */
+  color: white; /* White text color for contrast */
+}
+
+/* Styling for the heading inside posts container */
+.posts-container h1 {
+  font-size: 1.8rem; /* Increases font size of the heading */
+  margin-bottom: 20px; /* Adds space below the heading */
+  background-color: #f0f5f2; /* UNT green background */
+  padding: 10px; /* Adds padding around the heading text */
+  border-radius: 4px; /* Rounds the corners */
+  color: white; /* White text color for contrast */
+}
+
+/* Style for individual post items */
+.posts-container .post-item {
+  border: 1px solid #ddd; /* Light border around each post item */
+  border-radius: 8px; /* Rounds the corners */
+  padding: 15px; /* Adds padding inside each post item */
+  margin-bottom: 15px; /* Adds space below each post item */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Overall page styling */
+body {
+  background-color: #e9f3ee; /* UNT green as background for the entire page */
+  color: white; /* White text color for general readability */
+  font-family: Arial, sans-serif; /* Sets the font for the entire page */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+}
