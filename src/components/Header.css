@@ -1,0 +1,71 @@
+/* Apply background image and overall styling to the header */
+.centered-header {
+  position: relative; /* Allows for absolute positioning of the overlay */
+  background-image: url('/Frontend/src/assets/background.jpg'); /* Path to the background image */
+  background-size: contain; /* Ensures the full image is visible without cropping */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  color: white; /* Sets text color to white */
+  padding: 60px 0; /* Adds padding at the top and bottom */
+  text-align: center; /* Centers text horizontally */
+  width: 100vw; /* Sets width to full viewport width */
+  height: 50vh; /* Sets height to 50% of viewport height */
+  box-sizing: border-box; /* Includes padding in width calculation */
+}
+
+/* Media query for screens wider than 768px */
+@media (min-width: 768px) {
+  .centered-header {
+    height: 40vh; /* Reduces header height on larger screens */
+  }
+}
+
+/* Add a semi-transparent overlay */
+.centered-header::before {
+  content: ""; /* Creates a pseudo-element for the overlay */
+  position: absolute; /* Positions overlay within .centered-header */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; /* Covers the entire header */
+ 
+  z-index: 1; /* Places overlay below the content */
+}
+
+/* Ensure the header content appears above the overlay */
+.header-content {
+  position: relative; /* Positions content relative to the overlay */
+  max-width: 800px; /* Constrains the content width */
+  margin: 0 auto; /* Centers the content horizontally */
+  z-index: 2; /* Places content above the overlay */
+}
+
+/* Styling for the header title */
+.centered-header h1 {
+  font-size: 3em; /* Large font size for the title */
+  margin: 0; /* Removes default margin */
+}
+
+/* Flex layout for navigation links */
+.centered-header nav {
+  display: flex; /* Enables flex layout for navigation */
+  justify-content: center; /* Centers navigation items */
+  gap: 15px; /* Space between navigation links */
+  margin-top: 20px; /* Adds space above the navigation */
+}
+
+/* Navigation link styling */
+.nav-link {
+  color: black; /* Sets text color to black */
+  background-color: white; /* White background for links */
+  padding: 10px 20px; /* Adds padding inside each link */
+  border-radius: 5px; /* Rounds the corners */
+  text-decoration: none; /* Removes underline */
+  font-size: 1em; /* Sets font size */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for navigation links */
+.nav-link:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+}
