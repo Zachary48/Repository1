@@ -1,20 +1,21 @@
+// GoogleAuth.jsx
 import React from 'react';
-import { auth, googleProvider } from '../config/firebase';
 import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../config/firebase';
 
-const GoogleAuth = ({ isRegister }) => {
-  const handleGoogleSignIn = async () => {
+const GoogleAuth = () => {
+  const signInWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      console.log('Google Sign-In successful:', result.user); // Debug log
+      await signInWithPopup(auth, googleProvider);
+      console.log("User signed in with Google");
     } catch (error) {
-      console.error(`Google Sign-In Error: ${error.message}`); // Debug log for errors
+      console.error("Error signing in with Google:", error.message);
     }
   };
 
   return (
-    <button onClick={handleGoogleSignIn}>
-      {isRegister ? 'Register with Google' : 'Sign In with Google'}
+    <button onClick={signInWithGoogle} className="google-signin-button">
+      Sign In with Google
     </button>
   );
 };
