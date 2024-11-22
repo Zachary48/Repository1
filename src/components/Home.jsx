@@ -1,7 +1,6 @@
 import React from 'react';
-
-// Import CSS for styling
 import './Home.css';
+import Feed from './Feed'; // Import Feed component
 
 function Home() {
   return (
@@ -31,19 +30,7 @@ function Home() {
         {/* Research Postings */}
         <div className="postings-container">
           <h2>Research Opportunities</h2>
-          <div className="posting">
-            <h3>Machine Learning Internship</h3>
-            <p>Department: Computer Science</p>
-            <p>Description: Work on cutting-edge AI projects...</p>
-            <button className="btn btn-secondary">View Details</button>
-          </div>
-          <div className="posting">
-            <h3>Climate Change Research</h3>
-            <p>Department: Environmental Studies</p>
-            <p>Description: Join our team in studying global climate change...</p>
-            <button className="btn btn-secondary">View Details</button>
-          </div>
-          {/* Add more postings as needed */}
+          <Feed /> {/* Integrated Feed component */}
         </div>
       </div>
 

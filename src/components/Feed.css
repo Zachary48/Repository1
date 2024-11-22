@@ -1,0 +1,22 @@
+.feed-container {
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .feed-error {
+    color: red;
+    text-align: center;
+    font-size: 1em;
+    margin: 20px;
+  }
+  
+  .feed-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .feed-list > * {
+    margin-bottom: 20px; /* Add spacing between posts */
+  }
+  
