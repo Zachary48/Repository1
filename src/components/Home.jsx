@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import SidebarFilter from './SidebarFilter'; // Import SidebarFilter component
 
 function Home() {
   const navigate = useNavigate(); // Initialize navigate function
+  const [selectedFilters, setSelectedFilters] = useState([]); // State for selected filters
+
+  const filters = [
+    { label: 'Department', value: 'department' },
+    { label: 'Research Type', value: 'researchType' },
+    { label: 'Location', value: 'location' },
+  ];
+
+  // Function to handle filter changes
+  const handleFilterChange = (filterValue) => {
+    setSelectedFilters((prevFilters) =>
+      prevFilters.includes(filterValue)
+        ? prevFilters.filter((f) => f !== filterValue) // Remove filter if already selected
+        : [...prevFilters, filterValue] // Add new filter
+    );
+  };
 
   return (
     <div className="home-container">
@@ -16,7 +33,6 @@ function Home() {
           className="search-bar"
         />
         <div className="header-buttons">
-          {/* Add onClick to navigate to /signin */}
           <button
             className="btn sign-in-button"
             onClick={() => navigate('/signin')}
@@ -28,20 +44,14 @@ function Home() {
 
       {/* Main Content */}
       <div className="main-content">
-        {/* Sidebar */}
-        <aside className="sidebar">
-          <h3>Filters</h3>
-          <ul>
-            <li>Department</li>
-            <li>Research Type</li>
-            <li>Location</li>
-          </ul>
-        </aside>
+        {/* Sidebar with filters */}
+        <SidebarFilter filters={filters} onFilterChange={handleFilterChange} />
 
         {/* Research Postings */}
         <div className="postings-container">
           <h2>Research Opportunities</h2>
-          {/* Content goes here */}
+          <p>Selected Filters: {selectedFilters.join(', ') || 'None'}</p>
+          {/* Add content dynamically based on selectedFilters */}
         </div>
       </div>
 
