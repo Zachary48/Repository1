@@ -1,19 +1,28 @@
 import React from 'react';
 import './Home.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function Home() {
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate(); // Initialize navigate function
 
   return (
     <div className="home-container">
       {/* Header */}
       <header className="home-header">
         <div className="logo">Research Finder</div>
-        <input type="text" placeholder="Search research postings..." className="search-bar" />
+        <input
+          type="text"
+          placeholder="Search research postings..."
+          className="search-bar"
+        />
         <div className="header-buttons">
-          <button className="btn" onClick={() => navigate('/signin')}>Sign In</button> {/* Navigate to Sign-In */}
-          <button className="btn btn-primary" onClick={() => navigate('/register')}>Post a Research Position</button>
+          {/* Add onClick to navigate to /signin */}
+          <button
+            className="btn sign-in-button"
+            onClick={() => navigate('/signin')}
+          >
+            Sign In
+          </button>
         </div>
       </header>
 
