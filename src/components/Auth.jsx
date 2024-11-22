@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import './Auth.css';
-import { auth } from '../config/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import GoogleAuth from './GoogleAuth';
+import { auth, googleProvider } from '../config/firebase';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 
 const Auth = ({ mode }) => {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
   const isRegister = mode === 'register';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,12 +14,23 @@ const Auth = ({ mode }) => {
   const handleAuth = async () => {
     try {
       if (isRegister) {
-        // Registration logic here
+        // Registration logic here (if needed)
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         setMessage('Sign-in successful!');
       }
     } catch (error) {
+      setMessage(`Error: ${error.message}`);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log('Google Sign-In Result:', result.user);
+      setMessage(`Welcome ${result.user.displayName}!`);
+    } catch (error) {
+      console.error('Error during Google Sign-In:', error.message);
       setMessage(`Error: ${error.message}`);
     }
   };
@@ -31,17 +41,21 @@ const Auth = ({ mode }) => {
         <h2>{isRegister ? 'Register' : 'Sign In'}</h2>
         <p>Welcome! Please {isRegister ? 'register' : 'sign in'} to continue.</p>
 
-       
-        <button className="auth-google-button">
-  <img src="/assets/google-icon.png" alt="Google icon" className="google-icon" />
-  Continue with Google
-</button>
-
+        {/* Google Sign-In Button */}
+        <button className="auth-google-button" onClick={handleGoogleSignIn}>
+          <img
+            src="/assets/google-icon.png"
+            alt="Google icon"
+            className="google-icon"
+          />
+          Continue with Google
+        </button>
 
         <div className="auth-divider">
           <span>or</span>
         </div>
 
+        {/* Email and Password Inputs */}
         <input
           type="email"
           placeholder="Email address"
@@ -60,6 +74,7 @@ const Auth = ({ mode }) => {
 
         <p className="auth-message">{message}</p>
 
+        {/* Link to toggle between Sign In and Register */}
         <p className="auth-toggle">
           {isRegister ? "Already have an account?" : "Don't have an account?"}{' '}
           <a href={isRegister ? '/signin' : '/register'}>
