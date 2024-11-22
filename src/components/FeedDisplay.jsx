@@ -1,19 +1,34 @@
-import React from 'react';
-import './FeedDisplay.css'; // Assuming CSS file for styles
-
-const FeedDisplay = ({ data }) => {
-  const { title, body, compensation, organization, researcherName, workType } = data;
-
+import React, { useEffect, useState } from 'react';
+import FeedDisplay from './FeedDisplay';
+function Feed() {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('https://research-finder-server.vercel.app/posts');
+        if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []);
   return (
-    <div className="feed-display-card">
-      <h3>{title || 'Untitled'}</h3>
-      <p>{body || 'No description available.'}</p>
-      <p><strong>Compensation:</strong> {compensation || 'Not specified'}</p>
-      <p><strong>Organization:</strong> {organization || 'Unknown'}</p>
-      <p><strong>Researcher:</strong> {researcherName || 'Unknown'}</p>
-      <p><strong>Work Type:</strong> {workType || 'Not specified'}</p>
+    <div className="Feed">
+      <h1>Research Posts</h1>
+      {loading ? (
+        <p>Loading posts...</p>
+      ) : (
+        posts.map((post, index) => <FeedDisplay key={index} data={post} />)
+      )}
     </div>
   );
-};
-
-export default FeedDisplay;
+}
+export default Feed;
