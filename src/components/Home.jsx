@@ -1,8 +1,10 @@
 import React from 'react';
 import './Home.css';
-import Feed from './Feed'; // Import Feed component
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate(); // Hook for navigation
+
   return (
     <div className="home-container">
       {/* Header */}
@@ -10,8 +12,8 @@ function Home() {
         <div className="logo">Research Finder</div>
         <input type="text" placeholder="Search research postings..." className="search-bar" />
         <div className="header-buttons">
-          <button className="btn">Sign In</button>
-          <button className="btn btn-primary">Post a Research Position</button>
+          <button className="btn" onClick={() => navigate('/signin')}>Sign In</button> {/* Navigate to Sign-In */}
+          <button className="btn btn-primary" onClick={() => navigate('/register')}>Post a Research Position</button>
         </div>
       </header>
 
@@ -30,7 +32,7 @@ function Home() {
         {/* Research Postings */}
         <div className="postings-container">
           <h2>Research Opportunities</h2>
-          <Feed /> {/* Integrated Feed component */}
+          {/* Content goes here */}
         </div>
       </div>
 

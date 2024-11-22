@@ -2,27 +2,16 @@ import React from 'react';
 import './FeedDisplay.css'; // Assuming CSS file for styles
 
 const FeedDisplay = ({ data }) => {
-  console.log('Post data:', data); // Log data to verify it's received
-
-  if (!data || typeof data !== 'object') {
-    return (
-      <div className="feed-display-error">
-        <p>No valid data available</p>
-      </div>
-    );
-  }
-
-  const { title = 'Untitled', body = 'No description provided.', compensation = 'Not specified' } = data;
+  const { title, body, compensation, organization, researcherName, workType } = data;
 
   return (
-    <div className="feed-display-card" role="article" aria-labelledby={`feed-title-${title}`}>
-      <h3 id={`feed-title-${title}`} className="feed-display-title">{title}</h3>
-      <p className="feed-display-body">
-        {body.length > 300 ? `${body.slice(0, 300)}...` : body}
-      </p>
-      <p className="feed-display-compensation">
-        <strong>Compensation:</strong> {compensation}
-      </p>
+    <div className="feed-display-card">
+      <h3>{title || 'Untitled'}</h3>
+      <p>{body || 'No description available.'}</p>
+      <p><strong>Compensation:</strong> {compensation || 'Not specified'}</p>
+      <p><strong>Organization:</strong> {organization || 'Unknown'}</p>
+      <p><strong>Researcher:</strong> {researcherName || 'Unknown'}</p>
+      <p><strong>Work Type:</strong> {workType || 'Not specified'}</p>
     </div>
   );
 };

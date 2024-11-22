@@ -1,6 +1,5 @@
-// Auth.jsx
-import './Auth.css';
 import React, { useState } from 'react';
+import './Auth.css'; // Add styles here
 import { auth } from '../config/firebase'; // Firebase configuration
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'; // Firebase auth functions
 import GoogleAuth from './GoogleAuth'; // Google auth component
@@ -15,54 +14,55 @@ const Auth = ({ mode }) => {
   const handleAuth = async () => {
     try {
       if (isRegister) {
-        // Register new user
         await createUserWithEmailAndPassword(auth, email, password);
         setMessage('User registered successfully');
       } else {
-        // Sign in existing user
         await signInWithEmailAndPassword(auth, email, password);
         setMessage('User signed in successfully');
       }
     } catch (error) {
-      setMessage(`Error: ${error.message}`); // Displays error message
+      setMessage(`Error: ${error.message}`);
     }
   };
 
   return (
     <div className="auth-container">
-      <div className="auth">
-        <h3>{isRegister ? 'Register' : 'Sign In'}</h3> {/* Display heading based on mode */}
+      <div className="auth-card">
+        <h2>{isRegister ? 'Register' : 'Sign In'}</h2>
+        <p>Welcome! Please {isRegister ? 'create an account' : 'sign in'} to continue.</p>
+
+        <button className="auth-google-button">
+  <img src="/assets/google-icon.png" alt="Google icon" className="google-icon" />
+  Continue with Google
+</button>
+
+        <div className="auth-divider">
+          <span>or</span>
+        </div>
+
         <input
-          type="text"
-          placeholder="Email"
+          type="email"
+          placeholder="Email address"
           value={email}
-          onChange={(e) => setEmail(e.target.value)} // Updates email state
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)} // Updates password state
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleAuth}>{isRegister ? 'Register' : 'Sign In'}</button> {/* Button changes based on mode */}
-        <p>{message}</p> {/* Displays authentication messages */}
-        
-        {/* Google Sign-In Button */}
-        <div style={{ marginTop: '20px' }}>
-          <p>Or {isRegister ? 'register' : 'sign in'} with Google</p>
-          <GoogleAuth isRegister={isRegister} /> {/* Google Auth component */}
-        </div>
+        <button className="auth-submit-button" onClick={handleAuth}>
+          {isRegister ? 'Register' : 'Sign In'}
+        </button>
 
-        {/* Link to toggle between register and sign-in */}
-        <p>
+        <p className="auth-message">{message}</p>
+
+        <p className="auth-toggle">
           {isRegister ? "Already have an account?" : "Don't have an account?"}{' '}
-          <span
-            style={{ color: 'blue', cursor: 'pointer' }}
-          >
-            <a href={isRegister ? "/signin" : "/register"} style={{ color: 'blue', textDecoration: 'underline' }}>
-              {isRegister ? 'Sign In' : 'Register'}
-            </a>
-          </span>
+          <a href={isRegister ? '/signin' : '/register'}>
+            {isRegister ? 'Sign In' : 'Register'}
+          </a>
         </p>
       </div>
     </div>
